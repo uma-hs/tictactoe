@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+   android:orientation="vertical"
+   android:layout_height="fill_parent"
+   android:layout_width="fill_parent">
+    <TableRow>
+        <ImageView
+            android:id="@+id/tile1"
+            android:src="@drawable/empty"
+
+            />
+        <ImageView
+            android:id="@+id/tile2"
+            android:src="@drawable/empty"
+
+            />
+        <ImageView
+            android:id="@+id/tile3"
+            android:src="@drawable/empty"
+
+            />
+    </TableRow>
+
+    <TableRow>
+        <ImageView
+            android:id="@+id/tile4"
+            android:src="@drawable/empty"
+
+            />
+        <ImageView
+            android:id="@+id/tile5"
+            android:src="@drawable/empty"
+
+            />
+        <ImageView
+            android:id="@+id/tile6"
+            android:src="@drawable/empty"
+
+            />
+    </TableRow>
+
+
+    <TableRow>
+        <ImageView
+            android:id="@+id/tile7"
+            android:src="@drawable/empty"
+
+            />
+        <ImageView
+            android:id="@+id/tile8"
+            android:src="@drawable/empty"
+
+            />
+        <ImageView
+            android:id="@+id/tile9"
+            android:src="@drawable/empty"
+
+            />
+    </TableRow>
+    <TextView
+        android:id="@+id/statusText"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/status_start"
+        android:paddingBottom="15px"
+        />
+    <Button
+        android:id="@+id/btnPlayAgain"
+        android:text="@string/play_again"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        />
+</TableLayout>
