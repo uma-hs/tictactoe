@@ -70,10 +70,11 @@ public class GameActivity extends AppCompatActivity {
             int row = index / 3;
             int col = index % 3;
             Move move = new TicTacToePlayerMove(human, row, col);
-            if (move.isValid(state)) {
-                move.execute(state);
-                view.setImageResource(R.drawable.x);
-            }
+            if (!move.isValid(state))
+                return;
+            move.execute(state);
+            view.setImageResource(R.drawable.x);
+
             boolean gameOver = checkForGameOver();
             if (!gameOver) {
                 new EvaluateComputerMoveAsyncTask().execute();
