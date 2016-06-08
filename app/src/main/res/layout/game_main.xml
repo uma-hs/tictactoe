@@ -1,23 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
-   android:orientation="vertical"
-   android:layout_height="fill_parent"
-   android:layout_width="fill_parent">
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:paddingLeft="20dip"
+    android:paddingRight="20dip">
     <TableRow>
         <ImageView
+            android:layout_weight="1"
             android:id="@+id/tile1"
             android:src="@drawable/empty"
-
+            android:padding="5dp"
+            android:background="@drawable/image_border"
+            android:adjustViewBounds="true"
             />
         <ImageView
+            android:layout_weight="1"
             android:id="@+id/tile2"
             android:src="@drawable/empty"
-
+            android:padding="5dp"
+            android:background="@drawable/image_border"
+            android:adjustViewBounds="true"
             />
         <ImageView
+            android:layout_weight="1"
             android:id="@+id/tile3"
             android:src="@drawable/empty"
-
+            android:padding="5dp"
+            android:background="@drawable/image_border"
+            android:adjustViewBounds="true"
             />
     </TableRow>
 
@@ -25,17 +37,26 @@
         <ImageView
             android:id="@+id/tile4"
             android:src="@drawable/empty"
-
+            android:padding="5dp"
+            android:background="@drawable/image_border"
+            android:layout_weight="1"
+            android:adjustViewBounds="true"
             />
         <ImageView
             android:id="@+id/tile5"
             android:src="@drawable/empty"
-
+            android:padding="5dp"
+            android:background="@drawable/image_border"
+            android:layout_weight="1"
+            android:adjustViewBounds="true"
             />
         <ImageView
             android:id="@+id/tile6"
             android:src="@drawable/empty"
-
+            android:padding="5dp"
+            android:background="@drawable/image_border"
+            android:layout_weight="1"
+            android:adjustViewBounds="true"
             />
     </TableRow>
 
@@ -44,17 +65,26 @@
         <ImageView
             android:id="@+id/tile7"
             android:src="@drawable/empty"
-
+            android:padding="5dp"
+            android:background="@drawable/image_border"
+            android:layout_weight="1"
+            android:adjustViewBounds="true"
             />
         <ImageView
             android:id="@+id/tile8"
+            android:padding="5dp"
+            android:background="@drawable/image_border"
             android:src="@drawable/empty"
-
+            android:layout_weight="1"
+            android:adjustViewBounds="true"
             />
         <ImageView
             android:id="@+id/tile9"
+            android:padding="5dp"
+            android:background="@drawable/image_border"
             android:src="@drawable/empty"
-
+            android:layout_weight="1"
+            android:adjustViewBounds="true"
             />
     </TableRow>
     <TextView
@@ -62,7 +92,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="@string/status_start"
-        android:paddingBottom="15px"
+        android:paddingTop="30dp"
         />
     <Button
         android:id="@+id/btnPlayAgain"
