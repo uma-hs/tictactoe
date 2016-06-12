@@ -35,7 +35,7 @@ public class TicTacGameState implements GameState {
 			winner = Player.COMPUTER;
 			return true;
 		}
-		boolean humanWon = playerWonTheGame(Player.COMPUTER.getValue());
+		boolean humanWon = playerWonTheGame(Player.HUMAN.getValue());
 		if (humanWon) {
 			winner = Player.HUMAN;
 			return true;

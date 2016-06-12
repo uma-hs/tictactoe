@@ -3,11 +3,13 @@ package com.uma.android.tic_tac_toe.ui;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.uma.android.tic_tac_toe.game.EvaluationLevel;
 import com.uma.android.tictactoe.R;
 import com.uma.android.tic_tac_toe.game.GameEvaluator;
 import com.uma.android.tic_tac_toe.game.GameState;
@@ -18,6 +20,7 @@ import com.uma.android.tic_tac_toe.game.TicTacToeEvaluator;
 import com.uma.android.tic_tac_toe.game.TicTacToePlayerMove;
 
 public class GameActivity extends AppCompatActivity {
+    private static String TAG =GameActivity.class.getCanonicalName();
     private Player human;
     private Player computer;
     private GameEvaluator evaluator;
@@ -26,6 +29,7 @@ public class GameActivity extends AppCompatActivity {
     private ImageView[] tiles = new ImageView[3 * 3];
     private TextView statusBar;
     private Button playAgainBtn;
+    private EvaluationLevel evaluationLevel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -118,7 +122,10 @@ public class GameActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Move ticTacToePlayerMove) {
 
-            if (ticTacToePlayerMove == null) return;
+            if (ticTacToePlayerMove == null) {
+                checkForGameOver();
+                return;
+            }
             ticTacToePlayerMove.execute(state);
             int id = ticTacToePlayerMove.getX() * 3 + ticTacToePlayerMove.getY();
             ImageView oppView = (ImageView) findViewById(imageIDS[id]);
@@ -135,7 +142,11 @@ public class GameActivity extends AppCompatActivity {
 
         @Override
         protected Move doInBackground(Void... params) {
-            Move computerMove = evaluator.getBestMove(state, computer, human);
+            Move computerMove = evaluator.getBestMove(state, computer, human,evaluationLevel);
+            if(computerMove!=null)
+                 Log.d(TAG,"compuer_move : "+ computerMove.getX() +" "+computerMove.getY());
+            else
+                Log.d(TAG,"compuer_move : "+"NULL computer move");
             return computerMove;
         }
     }

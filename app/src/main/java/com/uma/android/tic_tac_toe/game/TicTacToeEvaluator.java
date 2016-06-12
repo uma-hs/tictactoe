@@ -1,15 +1,18 @@
 package com.uma.android.tic_tac_toe.game;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class TicTacToeEvaluator implements GameEvaluator {
 	final static int SIZE = 3;
 	static Point bestMove = null;
+	static String TAG=TicTacToeEvaluator.class.getName();
 
 	@SuppressWarnings("unused")
 	@Override
-	public Move getBestMove(GameState state, Player computer, Player user) {
+	public Move getBestMove(GameState state, Player computer, Player user,EvaluationLevel evaluationLevel) {
 		char board[][] = new char[SIZE][SIZE];
 		for (int i = 0; i < SIZE; i++) {
 			for (int j = 0; j < SIZE; j++) {
@@ -17,7 +20,8 @@ public class TicTacToeEvaluator implements GameEvaluator {
 			}
 		}
 		bestMove = null;
-		minimax(board, 0, computer.getValue(), computer.getValue(),
+
+		minimax(board, 0,evaluationLevel.getLevel(), computer.getValue(), computer.getValue(),
 				user.getValue());
 		if (bestMove == null)
 			return null;
@@ -26,15 +30,19 @@ public class TicTacToeEvaluator implements GameEvaluator {
 
 	}
 
-	protected int minimax(char board[][], int depth, char currentPlayer,
+	protected int minimax(char board[][], int depth, int evaluationLevel,char currentPlayer,
 						  char maximizingPlayer, char minimizingPlayer) {
 		if (playerWonTheGame(board, maximizingPlayer))
 			return 1;
 		if (playerWonTheGame(board, minimizingPlayer))
 			return -1;
+		if(depth==evaluationLevel){
+			return 0;
+		}
 		List<Point> pointsAvailable = getAvailablePoints(board);
 		if (pointsAvailable.isEmpty())
 			return 0;
+		Log.d(TAG, "minimax: At depth " + depth );
 
 		int min = Integer.MAX_VALUE, max = Integer.MIN_VALUE;
 
@@ -42,7 +50,7 @@ public class TicTacToeEvaluator implements GameEvaluator {
 			Point point = pointsAvailable.get(i);
 			if (currentPlayer == maximizingPlayer) {
 				board[point.x][point.y] = currentPlayer;
-				int currentScore = minimax(board, depth + 1, minimizingPlayer,
+				int currentScore = minimax(board, depth + 1,evaluationLevel, minimizingPlayer,
 						maximizingPlayer, minimizingPlayer);
 				max = Math.max(currentScore, max);
 
@@ -60,7 +68,7 @@ public class TicTacToeEvaluator implements GameEvaluator {
 				}
 			} else {
 				board[point.x][point.y] = currentPlayer;
-				int currentScore = minimax(board, depth + 1, maximizingPlayer,
+				int currentScore = minimax(board, depth + 1, evaluationLevel,maximizingPlayer,
 						maximizingPlayer, minimizingPlayer);
 				min = Math.min(currentScore, min);
 				if (min == -1) {
