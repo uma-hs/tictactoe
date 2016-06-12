@@ -8,4 +8,5 @@
     <string name="status_lost">You lost at tic tac toe to a computer.</string>
     <string name="status_won">You won at tic tac toe. Congratulations!!!!!</string>
     <string name="play_again">Play again?</string>
+    <string name="title_activity_main">MainActivity</string>
 </resources>

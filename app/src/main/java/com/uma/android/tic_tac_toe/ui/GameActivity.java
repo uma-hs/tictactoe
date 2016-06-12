@@ -19,6 +19,8 @@ import com.uma.android.tic_tac_toe.game.TicTacGameState;
 import com.uma.android.tic_tac_toe.game.TicTacToeEvaluator;
 import com.uma.android.tic_tac_toe.game.TicTacToePlayerMove;
 
+import java.util.Random;
+
 public class GameActivity extends AppCompatActivity {
     private static String TAG =GameActivity.class.getCanonicalName();
     private Player human;
@@ -30,6 +32,7 @@ public class GameActivity extends AppCompatActivity {
     private TextView statusBar;
     private Button playAgainBtn;
     private EvaluationLevel evaluationLevel;
+    private boolean firstPlayerHuman;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +42,10 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void initializeGame() {
+        //
+        evaluationLevel=EvaluationLevel.MEDIUM;
+        firstPlayerHuman=false;
+
         human = Player.HUMAN;
         computer = Player.COMPUTER;
         evaluator = new TicTacToeEvaluator();
@@ -56,6 +63,9 @@ public class GameActivity extends AppCompatActivity {
             tiles[i] = (ImageView) findViewById(imageIDS[i]);
             tiles[i].setOnClickListener(tilesOnclickListener);
         }
+
+        if(!firstPlayerHuman)
+            selectComputerMove();
 
     }
 
@@ -116,6 +126,13 @@ public class GameActivity extends AppCompatActivity {
             playAgainBtn.setVisibility(View.INVISIBLE);
             state = new TicTacGameState();
         }
+    }
+    private void selectComputerMove(){
+        int imageID=new Random().nextInt(8)+1;
+        ImageView oppView = (ImageView) findViewById(imageIDS[imageID]);
+        oppView.setImageResource(R.drawable.o);
+        statusBar.setText(R.string.status_yourmove);
+
     }
 
     private class EvaluateComputerMoveAsyncTask extends AsyncTask<Void, Void, Move> {
