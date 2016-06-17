@@ -139,8 +139,6 @@ public class GameActivity extends AppCompatActivity {
                 findViewById(imgID).setClickable(false);
             }
             //playAgainBtn.setVisibility(View.VISIBLE);
-        }else{
-            usersTurn=true;
         }
         return gameOver;
     }
@@ -189,7 +187,13 @@ public class GameActivity extends AppCompatActivity {
             ImageView oppView = (ImageView) findViewById(imageIDS[id]);
             oppView.setImageResource(R.drawable.o);
             statusBar.setText(R.string.your_turn);
-            checkForGameOver();
+            if(checkForGameOver()){
+                usersTurn=false;
+            }else {
+                usersTurn=true;
+            };
+
+
         }
 
         @Override
