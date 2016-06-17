@@ -1,5 +1,6 @@
 package com.uma.android.tic_tac_toe.ui;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -32,7 +33,9 @@ public class GameActivity extends AppCompatActivity {
     private TextView statusBar;
     private Button playAgainBtn;
     private EvaluationLevel evaluationLevel;
-    private boolean firstPlayerHuman;
+    private volatile boolean firstPlayerHuman;
+    private volatile boolean usersTurn;
+    private PreferenceManager preferenceManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,16 +45,21 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void initializeGame() {
+        Intent intent=getIntent();
         //
-        evaluationLevel=EvaluationLevel.MEDIUM;
-        firstPlayerHuman=false;
+        evaluationLevel=(EvaluationLevel)intent.getSerializableExtra("evaluationLevel");
+        ((TextView)findViewById(R.id.level)).setText(String.format(getResources().getString(R.string.level),evaluationLevel.toString()));
+
+        statusBar = (TextView) findViewById(R.id.statusText);
+
+        preferenceManager=PreferenceManager.getInstance(this);
 
         human = Player.HUMAN;
         computer = Player.COMPUTER;
         evaluator = new TicTacToeEvaluator();
         state = new TicTacGameState();
-
-        statusBar = (TextView) findViewById(R.id.statusText);
+        initialisePlayers();
+        resetWinCounts();
         playAgainBtn = (Button) findViewById(R.id.btnPlayAgain);
         playAgainBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,14 +72,26 @@ public class GameActivity extends AppCompatActivity {
             tiles[i].setOnClickListener(tilesOnclickListener);
         }
 
-        if(!firstPlayerHuman)
-            selectComputerMove();
 
+
+    }
+    private void initialisePlayers(){
+        firstPlayerHuman=preferenceManager.getTotalGamesCount(evaluationLevel)%2==0;
+        if(!firstPlayerHuman){
+            statusBar.setText(R.string.computers_turn);
+            usersTurn=false;
+            selectComputerMove();
+            usersTurn=true;
+        }else{
+            statusBar.setText(R.string.your_turn);
+            usersTurn=true;
+        }
     }
 
     final View.OnClickListener tilesOnclickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+            if(!usersTurn) return;
             ImageView view = (ImageView) v;
             int index = -1;
             for (int i = imageIDS.length - 1; i > -1; i--) {
@@ -88,6 +108,7 @@ public class GameActivity extends AppCompatActivity {
                 return;
             move.execute(state);
             view.setImageResource(R.drawable.x);
+            usersTurn=false;
 
             boolean gameOver = checkForGameOver();
             if (!gameOver) {
@@ -101,19 +122,25 @@ public class GameActivity extends AppCompatActivity {
         if (state.isDraw()) {
             gameOver = true;
             statusBar.setText(R.string.status_draw);
+            preferenceManager.setTiesCount(evaluationLevel);
         } else if (state.isWin()) {
             gameOver = true;
             if (human == state.getWinner()) {
                 statusBar.setText(R.string.status_won);
+                preferenceManager.setHumanWinCount(evaluationLevel);
             } else {
                 statusBar.setText(R.string.status_lost);
+                preferenceManager.setComputerWinCount(evaluationLevel);
             }
         }
         if (gameOver) {
+            usersTurn=false;
             for (int imgID : imageIDS) {
                 findViewById(imgID).setClickable(false);
             }
-            playAgainBtn.setVisibility(View.VISIBLE);
+            //playAgainBtn.setVisibility(View.VISIBLE);
+        }else{
+            usersTurn=true;
         }
         return gameOver;
     }
@@ -122,16 +149,30 @@ public class GameActivity extends AppCompatActivity {
         for (ImageView tile : tiles) {
             tile.setImageResource(R.drawable.empty);
             tile.setClickable(true);
-            statusBar.setText(R.string.status_start);
-            playAgainBtn.setVisibility(View.INVISIBLE);
+            //playAgainBtn.setVisibility(View.INVISIBLE);
             state = new TicTacGameState();
         }
+        //statusBar.setText(R.string.status_start);
+        initialisePlayers();
+        resetWinCounts();
+
+    }
+
+    private void resetWinCounts(){
+        int humanWins=preferenceManager.getHumanWinCount(evaluationLevel);
+        int computerWins=preferenceManager.getComputerWinCount(evaluationLevel);
+        int ties=preferenceManager.getTiesCount(evaluationLevel);
+        ((TextView)findViewById(R.id.human)).setText(String.format(getResources().getString(R.string.human),humanWins));
+
+        ((TextView)findViewById(R.id.ties)).setText(String.format(getResources().getString(R.string.ties),humanWins));
+
+        ((TextView)findViewById(R.id.computer)).setText(String.format(getResources().getString(R.string.computer),humanWins));
     }
     private void selectComputerMove(){
         int imageID=new Random().nextInt(8)+1;
         ImageView oppView = (ImageView) findViewById(imageIDS[imageID]);
         oppView.setImageResource(R.drawable.o);
-        statusBar.setText(R.string.status_yourmove);
+        statusBar.setText(R.string.your_turn);
 
     }
 
@@ -147,19 +188,24 @@ public class GameActivity extends AppCompatActivity {
             int id = ticTacToePlayerMove.getX() * 3 + ticTacToePlayerMove.getY();
             ImageView oppView = (ImageView) findViewById(imageIDS[id]);
             oppView.setImageResource(R.drawable.o);
-            statusBar.setText(R.string.status_yourmove);
+            statusBar.setText(R.string.your_turn);
             checkForGameOver();
         }
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            statusBar.setText(R.string.status_computer_thinking);
+            statusBar.setText(R.string.computers_turn);
         }
 
         @Override
         protected Move doInBackground(Void... params) {
             Move computerMove = evaluator.getBestMove(state, computer, human,evaluationLevel);
+            try {
+                Thread.sleep(400L);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             if(computerMove!=null)
                  Log.d(TAG,"compuer_move : "+ computerMove.getX() +" "+computerMove.getY());
             else

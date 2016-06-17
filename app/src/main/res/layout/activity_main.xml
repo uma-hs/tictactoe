@@ -1,35 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/background">
 
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Select Difficulty Level"
+        android:text="Tic Tac Toe"
         android:id="@+id/textView"
-        android:layout_gravity="center_horizontal" />
+        style="@style/CodeFont"
+        android:textStyle="bold"
+        android:textSize="50dp"
+        android:layout_gravity="center_horizontal"
+        android:paddingTop="25dp"
+        android:paddingBottom="50dp"/>
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:text="Easy"
         android:id="@+id/btn_easy"
-        android:layout_gravity="center_horizontal" />
+        style="@style/CodeFont"
+        android:textStyle="bold"
+        android:layout_gravity="center_horizontal"
+        android:background="@android:color/transparent"
+        />
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:text="Medium "
+        android:text="Medium"
         android:id="@+id/btn_medium"
-        android:layout_gravity="center_horizontal" />
+        style="@style/CodeFont"
+        android:textStyle="bold"
+        android:layout_gravity="center_horizontal"
+        android:background="@android:color/transparent"/>
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:text="Difficult"
         android:id="@+id/btn_difficult"
-        android:layout_gravity="center_horizontal" />
+        style="@style/CodeFont"
+        android:textStyle="bold"
+        android:layout_gravity="center_horizontal"
+        android:background="@android:color/transparent"/>
+
+    <Button
+        android:layout_marginTop="20dp"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="About"
+        android:id="@+id/btn_about"
+        style="@style/CodeFont"
+        android:textStyle="bold"
+        android:layout_gravity="center_horizontal"
+        android:background="@android:color/transparent"/>
 </LinearLayout>

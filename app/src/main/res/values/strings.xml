@@ -3,10 +3,17 @@
     <string name="action_settings">Settings</string>
     <string name="status_start">You are X..</string>
     <string name="status_yourmove">Pick your next move.</string>
-    <string name="status_computer_thinking">The computer is thinking...</string>
-    <string name="status_draw">The game is a draw. Try again!</string>
-    <string name="status_lost">You lost at tic tac toe to a computer.</string>
-    <string name="status_won">You won at tic tac toe. Congratulations!!!!!</string>
-    <string name="play_again">Play again?</string>
+    <string name="status_computer_thinking">Thinking...</string>
+    <string name="status_draw">The Game Is Draw!</string>
+    <string name="status_lost">You Lost</string>
+    <string name="status_won">You won. Congratulations!</string>
+    <string name="play_again">New Game</string>
     <string name="title_activity_main">MainActivity</string>
+    <string name="level">Level: %1$s</string>
+    <string name="human">Human: %1$d</string>
+    <string name="ties">Medium: %1$d</string>
+    <string name="computer">Hard: %1$d</string>
+    <string name="your_turn">Your Turn(X)</string>
+    <string name="computers_turn">Computer\'s Turn(O)</string>
+
 </resources>

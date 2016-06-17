@@ -1,6 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/background"
+    >
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_weight="1"
+    android:layout_height="0dp"
+    android:orientation="vertical"
+    android:paddingLeft="20dip"
+    android:paddingRight="20dip"
+    android:paddingTop="15dip">
+<TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="20dip"
+    android:paddingRight="20dip"
+    android:id="@+id/level"
+    style="@style/CodeFont"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="20dip"
+        android:paddingRight="20dip"
+        android:paddingTop="15dip"
+        >
+        <TextView
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/human"
+            android:text="human:"
+            style="@style/CodeFont"/>
+        <TextView
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/ties"
+            android:text="ties"
+            style="@style/CodeFont"/>
+        <TextView
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/computer"
+            android:text="computer"
+            style="@style/CodeFont"/>
+
+    </LinearLayout>
+
+</LinearLayout>
+
 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
+    android:gravity="center"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
@@ -87,18 +143,38 @@
             android:adjustViewBounds="true"
             />
     </TableRow>
-    <TextView
-        android:id="@+id/statusText"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/status_start"
-        android:paddingTop="30dp"
-        />
-    <Button
-        android:id="@+id/btnPlayAgain"
-        android:text="@string/play_again"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="invisible"
-        />
+
 </TableLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_marginTop="15dp">
+        <TextView
+            android:id="@+id/statusText"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/status_start"
+            style="@style/CodeFont"
+            android:textSize="30dp"
+            android:textStyle="bold"
+            android:gravity="center"
+            />
+        <Button
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="20dp"
+            android:id="@+id/btnPlayAgain"
+            android:textSize="25dp"
+            android:text="@string/play_again"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/CodeFont"
+            android:background="@android:color/transparent"
+            />
+
+    </LinearLayout>
+
+    </LinearLayout>
