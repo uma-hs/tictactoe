@@ -11,8 +11,8 @@
     <string name="title_activity_main">MainActivity</string>
     <string name="level">Level: %1$s</string>
     <string name="human">Human: %1$d</string>
-    <string name="ties">Medium: %1$d</string>
-    <string name="computer">Hard: %1$d</string>
+    <string name="ties">Ties: %1$d</string>
+    <string name="computer">Computer: %1$d</string>
     <string name="your_turn">Your Turn(X)</string>
     <string name="computers_turn">Computer\'s Turn(O)</string>
 

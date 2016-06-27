@@ -162,9 +162,9 @@ public class GameActivity extends AppCompatActivity {
         int ties=preferenceManager.getTiesCount(evaluationLevel);
         ((TextView)findViewById(R.id.human)).setText(String.format(getResources().getString(R.string.human),humanWins));
 
-        ((TextView)findViewById(R.id.ties)).setText(String.format(getResources().getString(R.string.ties),humanWins));
+        ((TextView)findViewById(R.id.ties)).setText(String.format(getResources().getString(R.string.ties),ties));
 
-        ((TextView)findViewById(R.id.computer)).setText(String.format(getResources().getString(R.string.computer),humanWins));
+        ((TextView)findViewById(R.id.computer)).setText(String.format(getResources().getString(R.string.computer),computerWins));
     }
     private void selectComputerMove(){
         int imageID=new Random().nextInt(8)+1;

@@ -6,7 +6,7 @@ import java.io.Serializable;
  * Created by Umamaheshwar HS on 6/11/2016.
  */
 public enum EvaluationLevel implements Serializable {
-    EASY(2), MEDIUM(4), DIFFICULT(12);
+    EASY(2), MEDIUM(6), DIFFICULT(12);
     private int level;
 
     private EvaluationLevel(int level) {
