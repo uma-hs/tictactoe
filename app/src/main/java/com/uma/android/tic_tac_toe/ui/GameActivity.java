@@ -91,6 +91,7 @@ public class GameActivity extends AppCompatActivity {
     final View.OnClickListener tilesOnclickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+            Log.d(TAG,"On Click Tile");
             if(!usersTurn) return;
             ImageView view = (ImageView) v;
             int index = -1;
@@ -106,11 +107,13 @@ public class GameActivity extends AppCompatActivity {
             Move move = new TicTacToePlayerMove(human, row, col);
             if (!move.isValid(state))
                 return;
+            Log.d(TAG,"Executing Move.."+row +" " +col);
             move.execute(state);
             view.setImageResource(R.drawable.x);
             usersTurn=false;
 
             boolean gameOver = checkForGameOver();
+            Log.d(TAG,"After Executing Move: GameOver Flag is : "+gameOver);
             if (!gameOver) {
                 new EvaluateComputerMoveAsyncTask().execute();
             }
@@ -125,6 +128,7 @@ public class GameActivity extends AppCompatActivity {
             preferenceManager.setTiesCount(evaluationLevel);
         } else if (state.isWin()) {
             gameOver = true;
+            strikeWinningTile(state.getWinner(),state.getWinStateValue());
             if (human == state.getWinner()) {
                 statusBar.setText(R.string.status_won);
                 preferenceManager.setHumanWinCount(evaluationLevel);
@@ -143,12 +147,65 @@ public class GameActivity extends AppCompatActivity {
         return gameOver;
     }
 
+    protected void strikeWinningTile(Player winner,int winStateValue){
+
+        if(winStateValue<3){
+            int row=winStateValue;
+            int imageStartingIndex=row*3;
+            for(int i=0;i<3;i++){
+               ImageView tile=(ImageView)findViewById(imageIDS[imageStartingIndex+i]);
+                if(winner==human){
+                    tile.setImageResource(R.drawable.x1);
+                }else{
+                    tile.setImageResource(R.drawable.o1);
+                }
+            }
+
+        }else if(winStateValue<6){
+                int column=winStateValue-3;
+            for(int i=0;i<3;i++){
+                    ImageView tile=(ImageView)findViewById(imageIDS[column+(i*3)]);
+                    if(winner==human){
+                        tile.setImageResource(R.drawable.x2);
+                    }else{
+                        tile.setImageResource(R.drawable.o2);
+                    }
+
+            }
+        }
+            else if(winStateValue==6){
+            ImageView tile1=(ImageView)findViewById(imageIDS[0]);
+            ImageView tile2=(ImageView)findViewById(imageIDS[4]);
+            ImageView tile3=(ImageView)findViewById(imageIDS[8]);
+            int imageID=winner==human?R.drawable.x3:R.drawable.o3;
+
+            tile1.setImageResource(imageID);
+            tile2.setImageResource(imageID);
+            tile3.setImageResource(imageID);
+
+
+        }else{
+
+            ImageView tile1=(ImageView)findViewById(imageIDS[2]);
+            ImageView tile2=(ImageView)findViewById(imageIDS[4]);
+            ImageView tile3=(ImageView)findViewById(imageIDS[6]);
+            int imageID=winner==human?R.drawable.x4:R.drawable.o4;
+
+            tile1.setImageResource(imageID);
+            tile2.setImageResource(imageID);
+            tile3.setImageResource(imageID);
+        }
+
+    }
+
     protected void resetGame() {
+        Log.d(TAG,"Inside Reset Game..."+"\n\n\n");
+
+        state = new TicTacGameState();
         for (ImageView tile : tiles) {
             tile.setImageResource(R.drawable.empty);
             tile.setClickable(true);
-            //playAgainBtn.setVisibility(View.INVISIBLE);
-            state = new TicTacGameState();
+            //playAgainBtn.setVisibility(View.INVISIBLE)
         }
         //statusBar.setText(R.string.status_start);
         initialisePlayers();
@@ -168,6 +225,13 @@ public class GameActivity extends AppCompatActivity {
     }
     private void selectComputerMove(){
         int imageID=new Random().nextInt(8)+1;
+        int row = imageID / 3;
+        int col = imageID % 3;
+        Move move = new TicTacToePlayerMove(computer, row, col);
+        if (!move.isValid(state))
+            return;
+        Log.d(TAG,"Executing Move.."+row +" " +col);
+        move.execute(state);
         ImageView oppView = (ImageView) findViewById(imageIDS[imageID]);
         oppView.setImageResource(R.drawable.o);
         statusBar.setText(R.string.your_turn);
@@ -204,11 +268,13 @@ public class GameActivity extends AppCompatActivity {
 
         @Override
         protected Move doInBackground(Void... params) {
+            Log.d(TAG,"Starting doInBackGround()....");
             Move computerMove = evaluator.getBestMove(state, computer, human,evaluationLevel);
             try {
                 Thread.sleep(400L);
             } catch (InterruptedException e) {
                 e.printStackTrace();
+                Log.d(TAG,"Exception in doInBackground()");
             }
             if(computerMove!=null)
                  Log.d(TAG,"compuer_move : "+ computerMove.getX() +" "+computerMove.getY());

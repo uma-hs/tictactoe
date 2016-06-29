@@ -21,7 +21,7 @@
     <Button
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:text="Easy"
+        android:text="EASY"
         android:id="@+id/btn_easy"
         style="@style/CodeFont"
         android:textStyle="bold"
@@ -29,22 +29,12 @@
         android:background="@android:color/transparent"
         />
 
-    <Button
-        android:layout_marginTop="20dp"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:text="Medium"
-        android:id="@+id/btn_medium"
-        style="@style/CodeFont"
-        android:textStyle="bold"
-        android:layout_gravity="center_horizontal"
-        android:background="@android:color/transparent"/>
 
     <Button
         android:layout_marginTop="20dp"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:text="Difficult"
+        android:text="HARD"
         android:id="@+id/btn_difficult"
         style="@style/CodeFont"
         android:textStyle="bold"
@@ -55,7 +45,7 @@
         android:layout_marginTop="20dp"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:text="About"
+        android:text="ABOUT"
         android:id="@+id/btn_about"
         style="@style/CodeFont"
         android:textStyle="bold"

@@ -12,4 +12,6 @@ public interface GameState {
 	public boolean isValidMove(Move move);
 
 	public Player getWinner();
+
+	public int getWinStateValue();
 }

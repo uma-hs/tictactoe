@@ -1,7 +1,5 @@
 package com.uma.android.tic_tac_toe.game;
 
-import android.util.Log;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,7 +40,7 @@ public class TicTacToeEvaluator implements GameEvaluator {
 		List<Point> pointsAvailable = getAvailablePoints(board);
 		if (pointsAvailable.isEmpty())
 			return 0;
-		Log.d(TAG, "minimax: At depth " + depth );
+		//Log.d(TAG, "minimax: At depth " + depth );
 
 		int min = Integer.MAX_VALUE, max = Integer.MIN_VALUE;
 

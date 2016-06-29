@@ -12,7 +12,6 @@ import com.uma.android.tictactoe.R;
 
 public class MainActivity extends AppCompatActivity {
     private Button btnEasy;
-    private Button btnMedium;
     private Button btnDifficult;
     private Button btnAbout;
 
@@ -27,8 +26,6 @@ public class MainActivity extends AppCompatActivity {
         btnEasy = (Button) findViewById(R.id.btn_easy);
         btnEasy.setOnClickListener(buttonOnClickListener);
 
-        btnMedium = (Button) findViewById(R.id.btn_medium);
-        btnMedium.setOnClickListener(buttonOnClickListener);
 
         btnDifficult = (Button) findViewById(R.id.btn_difficult);
         btnDifficult.setOnClickListener(buttonOnClickListener);
@@ -43,9 +40,6 @@ public class MainActivity extends AppCompatActivity {
             switch (v.getId()) {
                 case R.id.btn_easy:
                     startGameActivity(EvaluationLevel.EASY);
-                    break;
-                case R.id.btn_medium:
-                    startGameActivity(EvaluationLevel.MEDIUM);
                     break;
                 case R.id.btn_difficult:
                     startGameActivity(EvaluationLevel.DIFFICULT);
