@@ -122,11 +122,7 @@ public class GameActivity extends AppCompatActivity {
 
     protected boolean checkForGameOver() {
         boolean gameOver = false;
-        if (state.isDraw()) {
-            gameOver = true;
-            statusBar.setText(R.string.status_draw);
-            preferenceManager.setTiesCount(evaluationLevel);
-        } else if (state.isWin()) {
+         if (state.isWin()) {
             gameOver = true;
             strikeWinningTile(state.getWinner(),state.getWinStateValue());
             if (human == state.getWinner()) {
@@ -136,6 +132,10 @@ public class GameActivity extends AppCompatActivity {
                 statusBar.setText(R.string.status_lost);
                 preferenceManager.setComputerWinCount(evaluationLevel);
             }
+        }else if (state.isDraw()) {
+            gameOver = true;
+            statusBar.setText(R.string.status_draw);
+            preferenceManager.setTiesCount(evaluationLevel);
         }
         if (gameOver) {
             usersTurn=false;

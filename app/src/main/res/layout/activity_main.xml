@@ -13,11 +13,21 @@
         android:id="@+id/textView"
         style="@style/CodeFont"
         android:textStyle="bold"
-        android:textSize="50dp"
+        android:textSize="@dimen/text_size"
         android:layout_gravity="center_horizontal"
         android:paddingTop="25dp"
-        android:paddingBottom="50dp"/>
-
+        android:paddingBottom="20dp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:paddingBottom="25dp">
+    <ImageView
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:src="@drawable/ttt_img"
+        />
+    </LinearLayout>
     <Button
         android:layout_width="150dp"
         android:layout_height="wrap_content"
