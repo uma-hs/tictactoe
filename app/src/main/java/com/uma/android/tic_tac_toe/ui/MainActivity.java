@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
                     startGameActivity(EvaluationLevel.DIFFICULT);
                     break;
                 case R.id.btn_about:
-                    Toast.makeText(MainActivity.this, "Developed by Umamaheshwar HS", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "Developed by uhs", Toast.LENGTH_SHORT).show();
                     break;
             }
 
